@@ -6,7 +6,7 @@ class Message
   end
 
   def save
-  	
+    puts(self.inspect)
+    true
   end
-
 end

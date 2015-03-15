@@ -27,6 +27,7 @@ gem 'devise'
 gem 'haml-rails'
 gem "twitter-bootstrap-rails"
 gem 'angular-rails-templates'
+gem 'redis'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

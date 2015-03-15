@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :chats
-  resources :groups
   resources :groups
   resources :users
+  resources :chats do
+    collection do
+      post :save_message
+    end
+  end
 
   root 'groups#index'
   # The priority is based upon order of creation: first created -> highest priority.
