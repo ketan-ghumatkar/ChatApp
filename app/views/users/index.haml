@@ -1,0 +1,17 @@
+.clearfix
+  %h1.pull-left Listing Users
+  %a.btn.btn-large.btn-primary.pull-right.create-action{:href => "#{}", :title => "Create "} + Create
+
+- if @users.empty?
+  %p.text-center
+    No record to show
+- else
+  %table.table
+    %tr
+      %th #
+      %th Name
+    - @users.each_with_index do |user, index|
+      %tr
+        %td= index + 1
+
+        %td= user.name

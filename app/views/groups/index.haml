@@ -1,0 +1,19 @@
+.clearfix
+  %h1.pull-left Listing Group
+  %a.btn.btn-large.btn-primary.pull-right.create-action{:href => "#{new_group_path}", :title => "Create Group"} + Create Group
+
+- if @groups.empty?
+  %p.text-center
+    No record to show
+- else
+  %table.table
+    %tr
+      %th #
+      %th Name
+    - @groups.each_with_index do |group, index|
+      %tr
+        %td= index + 1
+
+        %td= group.name
+        %td
+          = link_to 'Edit', edit_group_path(group)
