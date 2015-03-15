@@ -1,5 +1,5 @@
 .col-lg-6
-  #chatwindow
+  #chatwindow{'ng-controller'=>'ChatController', 'ng-init'=>"init(#{current_user.to_json}, #{@group.to_json})"}
     .titleBox
       = @group.name
     #messagewindow
@@ -10,8 +10,8 @@
         %li
           %p
             pqr    
-    %form.sendWindow
+    %form.sendWindow{:name => 'chat', 'ng-submit'=>'sendMessage()', 'novalidate'=>''}
       .input-group
-        %input.form-control{:placeholder => "Type Message", :type => "text"}
+        %input.form-control{:placeholder => "Type Message", :type => "text", :name => 'message', 'ng-model'=>'message', 'ng-required'=>true}
         %span.input-group-btn
-          %input.btn.btn-default{:type => 'submit', :value => 'Go!'}
+          %input.btn.btn-default{:type => 'submit', :value => 'Send!', 'ng-disabled'=>true}
