@@ -1,0 +1,17 @@
+.col-lg-6
+  #chatwindow
+    .titleBox
+      = @group.name
+    #messagewindow
+      %ul 
+        %li
+          %p
+            abc
+        %li
+          %p
+            pqr    
+    %form.sendWindow
+      .input-group
+        %input.form-control{:placeholder => "Type Message", :type => "text"}
+        %span.input-group-btn
+          %input.btn.btn-default{:type => 'submit', :value => 'Go!'}
