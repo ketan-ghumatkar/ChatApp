@@ -10,10 +10,16 @@
     %tr
       %th #
       %th Name
+      %th Actions
     - @groups.each_with_index do |group, index|
       %tr
         %td= index + 1
 
         %td= link_to group.name, group_path(group)
         %td
-          = link_to 'Edit', edit_group_path(group)
+          - if(group.user_ids.include? current_user.id)
+            = link_to 'Chat', group_path(group) 
+            | 
+            = link_to 'Leave', leave_group_path(group) 
+          - else
+            = link_to 'Join', join_group_path(group)

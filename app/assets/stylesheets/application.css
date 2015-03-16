@@ -103,4 +103,7 @@
 #messagewindow ul {
   position: absolute;
   top: 37px;
+  overflow-y: scroll;
+  height: 300px;
+  width: 100%;
 }

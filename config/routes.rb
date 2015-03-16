@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :groups
+  resources :groups do
+    member do
+      get :join
+      get :leave
+    end
+  end
+  
   resources :users
   resources :chats do
     collection do

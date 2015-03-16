@@ -12,6 +12,8 @@
     %div.col-lg-7
       = f.text_field :name, :class => 'form-control', placeholder: "Name"
   %div.form-group
+    = f.label :name,"Select Group Users", :class => 'col-lg-2 control-label'
+    %abbr{title: "required"} *
     %div.col-lg-7
       = f.collection_select(:user_ids, User.all, :id, :name, {}, { multiple: true, prompt: true, class: 'form-control'} )
   %div.form-group

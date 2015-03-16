@@ -50,6 +50,20 @@ class GroupsController < ApplicationController
     @group = Group.find_by_id(params[:id])
   end
 
+  def join
+    @group = Group.find_by_id(params[:id])
+    @group.users << current_user
+    flash[:notice] = "You have joined group #{@group.name}. Start chatting with your friends"
+    redirect_to group_path(@group)
+  end
+
+  def leave
+    @group = Group.find_by_id(params[:id])
+    @group.users.delete current_user
+    flash[:notice] = "You have leaved group #{@group.name}. Start chatting with your friends"
+    redirect_to groups_path
+  end
+
   private
     def permitted_params
     	params.require(:group).permit(:name, user_ids: [])
