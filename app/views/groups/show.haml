@@ -3,15 +3,12 @@
     .titleBox
       = @group.name
     #messagewindow
-      %ul 
-        %li
+      %ul.chat
+        %li{ 'ng-repeat'=>'msg in messages' }
           %p
-            abc
-        %li
-          %p
-            pqr    
-    %form.sendWindow{:name => 'chat', 'ng-submit'=>'sendMessage()', 'novalidate'=>''}
+            {{ msg.sender }}: {{ msg.content }}
+    %form.sendWindow{ :name => 'form', 'ng-submit'=>'sendMessage()', 'novalidate'=>'' }
       .input-group
-        %input.form-control{:placeholder => "Type Message", :type => "text", :name => 'message', 'ng-model'=>'message', 'ng-required'=>true}
+        %input.form-control{ :placeholder => "Type Message", :type => "text", :name => 'message', 'ng-model'=>'message', 'ng-required'=>'true' }
         %span.input-group-btn
-          %input.btn.btn-default{:type => 'submit', :value => 'Send!', 'ng-disabled'=>true}
+          %input.btn.btn-default{ :type=>'submit', :value=>'Send!', 'ng-disabled'=>'chat.$invalid' }

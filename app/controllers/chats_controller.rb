@@ -1,29 +1,15 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  
-  def index
-    Thread.new do
-      @redis = Redis.new()
-      @redis.subscribe 'messages' do |on|
-        on.message do |channel, msg|
-          logger.info "###{channel} - [#{data}"
-        end
-      end
-    end
-  end
 
   def save_message
     @group = Group.find_by_id(params[:recipient_id])
-    @redis = Redis.new
     @message = Message.new(params[:content], params[:sender_id], params[:recipient_id])
-    if @message.save
-        @redis.publish 'messages', @messages.to_json
-        # redirect_to chats_path
-        render json: @message
-    else
-      error = { success: false, message: "MESSAGE_FAILURE" }
-      render json: error.to_json
-    end  
+    @sender = User.find_by_id(params[:sender_id]);
+    @message.save
+    
+    pub_msg = { content: params[:content], sender: @sender.name }
+    $redis.publish 'realtime_msg', { msg: pub_msg, recipient_user_ids: @group.users.collect(&:id)}.to_json
+    render json: @message
   end
 
 end
