@@ -32,10 +32,19 @@ ChatApp.controller('ChatController',
 
     };
 
+    $scope.getMessages = function () {
+      ChatService.messages($scope.group.id).then( function (data) {
+        $scope.messages = data;
+      }, function (error) {
+        $log.error(error);
+      })
+    };
+
     $scope.init = function (currentUser, group) {
 
       $scope.currentUser = currentUser;
       $scope.group = group;
+      $scope.getMessages();
 
     };
 

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :chats do
     collection do
       post :save_message
+      get :group_messages
     end
   end
 

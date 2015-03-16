@@ -21,4 +21,20 @@ ChatApp.service('ChatService', ['$http', '$q', function($http, $q) {
         });
     return deferred.promise;
   };
+
+  this.messages = function (group_id) {
+    var deferred = $q.defer();
+    var url = '/chats/' + group_id;
+
+    $http({
+          url: url,
+          method: "GET",
+        }).success(function (data) {
+          deferred.resolve(data);
+        }).error(function (error) {
+          deferred.reject(error);
+        });
+    return deferred.promise;
+
+  };
 }]);

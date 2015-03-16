@@ -6,7 +6,10 @@ class Message
   end
 
   def save
-    puts(self.inspect)
-    true
+    $redis.sadd "group:#{ @recipient_id }", self.to_json
+  end
+
+  def find_by_group_id(id)
+    $redis.smembers "group:{ id }"
   end
 end
